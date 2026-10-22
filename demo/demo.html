@@ -9,12 +9,21 @@
 <body>
     <div id="app">
         {{msg}}
+
+        <h2>title: {{ web.title }}</h2>
+        <h2>url: {{ web.url }}</h2>
     </div>
     <script>
         Vue.createApp({
             setup() {
+                const web = Vue.reactive({
+                    title: "haha",
+                    url: "https://baidu.com"
+                })
+
                 return {
-                    msg: "你好！"
+                    msg: "你好！",
+                    web
                 };
             }
         }).mount("#app ")
