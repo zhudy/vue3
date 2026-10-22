@@ -13,7 +13,7 @@
         <h2>url: {{ web.url }}</h2>
         <h2>num: {{num}}</h2>
         <h2 v-show="web.show">user: {{web.user}}</h2>
-        <button v-on:click="edit">修改url</button><br>
+        <button v-show="web.show" v-on:click="edit">修改url</button><br>
         <button @click="edit">修改url-简写形式</button><hr>
         回车 <input type="text" @keyup.enter="add(10,20)"><hr>
         空格键 <input type="text" @keyup.space="add(100,100)"><hr>
@@ -22,6 +22,9 @@
         Ctrl+Enter <input type="text" @keyup.ctl.enter="add(200,200)"><hr>
         Ctrl+A <input type="text" @keyup.ctl.a="add(2000,2000)""><hr>
         <button @click="toggle">切换显示状态</button><br>{{web.show}}
+        <p v-if="web.user < 1000">新网站</p>
+        <p v-else-if="web.user >= 1000 && web.user < 10000">优秀网站</p>
+        <p v-else>资深网站</p>
     </div>
     <script type="module">
         import {createApp, reactive, ref} from "../downloads/vue.esm-browser-3.5.44.js"
