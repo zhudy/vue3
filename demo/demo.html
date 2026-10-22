@@ -12,7 +12,7 @@
         <h2>title: {{ web.title }}</h2>
         <h2>url: {{ web.url }}</h2>
         <h2>num: {{num}}</h2>
-        <h2>user: {{web.user}}</h2>
+        <h2 v-show="web.show">user: {{web.user}}</h2>
         <button v-on:click="edit">修改url</button><br>
         <button @click="edit">修改url-简写形式</button><hr>
         回车 <input type="text" @keyup.enter="add(10,20)"><hr>
@@ -20,7 +20,8 @@
         w <input type="text" @keyup.w="add(1,1)"><hr>
         Tab <input type="text" @keydown.tab="add(2,2)"><hr>
         Ctrl+Enter <input type="text" @keyup.ctl.enter="add(200,200)"><hr>
-        Ctrl+A <input type="text" @keyup.ctl.a="add(2000,2000)"">
+        Ctrl+A <input type="text" @keyup.ctl.a="add(2000,2000)""><hr>
+        <button @click="toggle">切换显示状态</button><br>{{web.show}}
     </div>
     <script type="module">
         import {createApp, reactive, ref} from "../downloads/vue.esm-browser-3.5.44.js"
@@ -29,7 +30,8 @@
                 const web = reactive({
                     title: "haha",
                     url: "https://baidu.com",
-                    user: 0
+                    user: 0,
+                    show: true
                 })
                 // const num = ref(10)
                 // num.value += 1
@@ -40,12 +42,16 @@
                 const add = (a,b) =>{
                     web.user += a+b
                 }
+                const toggle = () =>{
+                    web.show = !web.show
+                }
                 return {
                     msg: "你好！",
                     num,
                     edit,
                     add,
-                    web
+                    web,
+                    toggle
                 };
             }
         }).mount("#app ")
