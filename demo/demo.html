@@ -11,18 +11,24 @@
 
         <h2>title: {{ web.title }}</h2>
         <h2>url: {{ web.url }}</h2>
+        <h2>num: {{num}}</h2>
     </div>
     <script type="module">
-        import {createApp, reactive} from "../downloads/vue.esm-browser-3.5.44.js"
+        import {createApp, reactive, ref} from "../downloads/vue.esm-browser-3.5.44.js"
         createApp({
             setup() {
                 const web = reactive({
                     title: "haha",
                     url: "https://baidu.com"
                 })
+                // const num = ref(10)
+                // num.value += 1
+                const num = ref([1,2,3])
 
+                web.url = "https://www.google.com"
                 return {
                     msg: "你好！",
+                    num,
                     web
                 };
             }
