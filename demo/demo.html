@@ -12,6 +12,10 @@
         <h2>title: {{ web.title }}</h2>
         <h2>url: {{ web.url }}</h2>
         <h2>num: {{num}}</h2>
+        <h2>user: {{web.user}}</h2>
+        <button v-on:click="edit">修改url</button><br>
+        <button @click="edit">修改url-简写形式</button><hr>
+        会车 <input type="text" @:keyup.enter="add(10,20)">
     </div>
     <script type="module">
         import {createApp, reactive, ref} from "../downloads/vue.esm-browser-3.5.44.js"
@@ -19,16 +23,23 @@
             setup() {
                 const web = reactive({
                     title: "haha",
-                    url: "https://baidu.com"
+                    url: "https://baidu.com",
+                    user: 0
                 })
                 // const num = ref(10)
                 // num.value += 1
                 const num = ref([1,2,3])
-
-                web.url = "https://www.google.com"
+                const edit = () =>{
+                    web.url = "https://www.google.com"
+                }
+                const add = (a,b) =>{
+                    web.user += a+b
+                }
                 return {
                     msg: "你好！",
                     num,
+                    edit,
+                    add,
                     web
                 };
             }
