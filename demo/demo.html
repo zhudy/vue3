@@ -15,7 +15,12 @@
         <h2>user: {{web.user}}</h2>
         <button v-on:click="edit">修改url</button><br>
         <button @click="edit">修改url-简写形式</button><hr>
-        会车 <input type="text" @:keyup.enter="add(10,20)">
+        回车 <input type="text" @keyup.enter="add(10,20)"><hr>
+        空格键 <input type="text" @keyup.space="add(100,100)"><hr>
+        w <input type="text" @keyup.w="add(1,1)"><hr>
+        Tab <input type="text" @keydown.tab="add(2,2)"><hr>
+        Ctrl+Enter <input type="text" @keyup.ctl.enter="add(200,200)"><hr>
+        Ctrl+A <input type="text" @keyup.ctl.a="add(2000,2000)"">
     </div>
     <script type="module">
         import {createApp, reactive, ref} from "../downloads/vue.esm-browser-3.5.44.js"
