@@ -7,20 +7,25 @@ from typing import List
 
 app = FastAPI()
 
+class Addr(BaseModel):
+    province: str
+    city: str
+
 class User(BaseModel):
     name: str = "root"
     age: int = Field(default=0, ge=0, le=100)   #默认值，最小值，最大值
     birth: Union[date, None]=None
     friends: List[int]=[]
     description: Optional[str] = None 
+    address: Addr
 
     @validator("name")
     def name_is_alpha(cls, value):
         assert value.isalpha(), 'name must be alpha'
         return value
 
-@app.post("/data", tags=["演示request body"])
-def data(user:User):
+@app.post("/user", tags=["演示request body"])
+def user(user:User):
     print(user, type(user))
     print(user.name, user.age)
     print(user.dict())
