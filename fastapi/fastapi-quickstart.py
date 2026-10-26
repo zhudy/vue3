@@ -1,14 +1,28 @@
 from fastapi import FastAPI
 import uvicorn
 from typing import Union
+from pydantic import BaseModel
+from datetime import date
+from typing import List
 
 app = FastAPI()
+
+class User(BaseModel):
+    name: str
+    age: int
+    birth: date
+    friends: List[int]
+
+@app.post("/data", tags=["演示request body"])
+def data(data:User):
+    print(data, type(data))
+    return {}
 
 @app.post("/jobs/{id}", tags=["职位id"],
           summary="{id} 职位的详细信息",
           description="描述",
           response_description="返回的描述")
-def j(id, kd, xl, gj: Union[str, None], xb=None):
+def j(id, kd, xl, gj:Union[str, None]=None, xb=None):
     #基于关键词、学历、工作经验三个关键词去查询数据库...
     return {"jobs": id,
             "关键词": kd,   #keyword
