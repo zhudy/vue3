@@ -1,22 +1,25 @@
 from fastapi import FastAPI
 import uvicorn
-from typing import Union
-from pydantic import BaseModel
+from typing import Union, Optional
+from pydantic import BaseModel, Field
 from datetime import date
 from typing import List
 
 app = FastAPI()
 
 class User(BaseModel):
-    name: str
-    age: int
-    birth: date
-    friends: List[int]
+    name: str = "root"
+    age: int = Field(default=0, ge=0, le=100)   #默认值，最小值，最大值
+    birth: Union[date, None]=None
+    friends: List[int]=[]
+    description: Optional[str] = None 
 
 @app.post("/data", tags=["演示request body"])
-def data(data:User):
-    print(data, type(data))
-    return {}
+def data(user:User):
+    print(user, type(user))
+    print(user.name, user.age)
+    print(user.dict())
+    return user
 
 @app.post("/jobs/{id}", tags=["职位id"],
           summary="{id} 职位的详细信息",
