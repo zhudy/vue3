@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File
 import uvicorn
 from typing import Union, Optional
 from pydantic import BaseModel, Field, validator
@@ -6,6 +6,11 @@ from datetime import date
 from typing import List
 
 app = FastAPI()
+
+@app.post("/file", tags=["小文件上传例子"])
+async def get_file(file: bytes = File()):   #适合小文件上传
+    print(file)
+    return{"上传文件的大小为: ": len(file)}
 
 class Addr(BaseModel):
     province: str
