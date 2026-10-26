@@ -4,6 +4,7 @@ from typing import Union, Optional
 from pydantic import BaseModel, Field, validator
 from datetime import date
 from typing import List
+import os
 
 app = FastAPI()
 
@@ -20,8 +21,13 @@ async def get_files(files: List[bytes] = File()):   #适合小文件上传
 @app.post("/uploadFile", tags=["大文件上传例子"])
 async def get_file(file: UploadFile):   #获得上传文件句柄
     print(file)
-    for line in file.file:
-        print(line)
+    # for line in file.file:
+    #     print(line)
+    # path = os.path.join("uploads", file.filename)   #写到文件里
+    path = os.path.join(file.filename)   #写到文件里
+    with open(path, "wb") as f:
+        for line in file.file:
+            f.write(line)
     return{"上传文件的名称为: ": file.filename}
 
 class Addr(BaseModel):
