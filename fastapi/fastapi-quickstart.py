@@ -3,6 +3,13 @@ import uvicorn
 
 app = FastAPI()
 
+@app.post("/user/{id}", tags=["用户id"],
+          summary="{id} 用户的详细信息",
+          description="描述",
+          response_description="返回的描述")
+def t(id):
+    return {"user": id }
+
 @app.post("/test", tags=["路径装饰器带参数的接口"],
           summary="总结",
           description="描述",
