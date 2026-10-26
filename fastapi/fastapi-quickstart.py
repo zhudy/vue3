@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from typing import Union, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from datetime import date
 from typing import List
 
@@ -13,6 +13,11 @@ class User(BaseModel):
     birth: Union[date, None]=None
     friends: List[int]=[]
     description: Optional[str] = None 
+
+    @validator("name")
+    def name_is_alpha(cls, value):
+        assert value.isalpha(), 'name must be alpha'
+        return value
 
 @app.post("/data", tags=["演示request body"])
 def data(user:User):
