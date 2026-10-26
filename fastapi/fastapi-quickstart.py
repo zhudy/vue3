@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
+from typing import Union
 
 app = FastAPI()
 
@@ -7,11 +8,13 @@ app = FastAPI()
           summary="{id} 职位的详细信息",
           description="描述",
           response_description="返回的描述")
-def j(id, kd, xl, gj):
+def j(id, kd, xl, gj: Union[str, None], xb=None):
+    #基于关键词、学历、工作经验三个关键词去查询数据库...
     return {"jobs": id,
             "关键词": kd,   #keyword
             "学历": xl,
-            "工作经验": gj }
+            "工作经验": gj,
+            "性别": xb }
 
 @app.post("/user/{id}", tags=["用户id"],
           summary="{id} 用户的详细信息",
