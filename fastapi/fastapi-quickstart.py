@@ -11,6 +11,11 @@ app = FastAPI()
 async def get_file(file: bytes = File()):   #适合小文件上传
     print(file)
     return{"上传文件的大小为: ": len(file)}
+@app.post("/files", tags=["多个小文件上传例子"])
+async def get_files(files: List[bytes] = File()):   #适合小文件上传
+    for file in files:
+        print(len(file))
+    return{"上传文件的个数为: ": len(files)}
 
 class Addr(BaseModel):
     province: str
