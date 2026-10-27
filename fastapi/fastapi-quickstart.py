@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 from typing import Union, Optional
 from pydantic import BaseModel, Field, validator
@@ -7,6 +8,8 @@ from typing import List
 import os
 
 app = FastAPI()
+
+app.mount("/www", StaticFiles(directory = "www"))
 
 @app.post("/file", tags=["小文件上传例子"])
 async def get_file(file: bytes = File()):   #适合小文件上传
