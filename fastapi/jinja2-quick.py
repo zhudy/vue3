@@ -10,6 +10,7 @@ def index(request: Request):
     name = "root"
     books = ["西游记","红楼梦","三国演义","水浒传"]
     info = {"name": "张三", "age": 32, "gender": "female"}
+    pi = 3.1415926
     #以上是业务逻辑层，以下是页面展示层
     return(templates.TemplateResponse(
         "index.html",   #模版文件
@@ -17,7 +18,8 @@ def index(request: Request):
             "request": request,
             "user": name,
             "books": books,
-            "info": info
+            "info": info,
+            "pi": pi
         }
     ))
 

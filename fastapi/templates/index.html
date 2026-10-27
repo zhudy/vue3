@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p>用户名：{{ user }}</p>
+    <p>用户名：{{ user|upper }}</p>
     <p>四大名著: {{ books }}</p>
     <p><1>: {{books.0}}</p>
     <p><2>: {{books.1}}</p>
@@ -22,5 +22,6 @@
     <p>姓名：{{info.name}}</p>
     <p>年龄：{{info.age}}</p>
     <p>性别：{{info.gender}}</p>
+    <p>PI: {{pi|round(3)}}</p>
 </body>
 </html>
