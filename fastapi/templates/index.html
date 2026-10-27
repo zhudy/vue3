@@ -18,6 +18,12 @@
         <li>{{books.2}}</li>
         <li>{{books.3}}</li>
     </ul>
+    用for循环来展示：
+    <ul>
+        {% for book in books %}
+        <li>{{book}}</li>
+        {% endfor %}
+    </ul>
     <p>info: {{info}}</p>
     <p>姓名：{{info.name}}</p>
     <p>年龄：{{info.age}}</p>
